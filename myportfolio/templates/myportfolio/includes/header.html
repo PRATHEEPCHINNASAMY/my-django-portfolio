@@ -1,0 +1,186 @@
+<header>
+  <div class="sidebar collapse d-lg-block" id="sidebarMenu">
+    <div class="text-center mt-3">
+      <img class="profile" src="/media/images/PRCHS.png" alt="Profilepic" />
+      <h5 style="margin: 0; font-size: 24px; font-weight: 700">
+        Pradeep Chinnasamy
+      </h5>
+    </div>
+
+    <div class="social-icons gap-3 mt-3 d-flex justify-content-center">
+      <a href="#" class="icon disabled">
+        <i class="bi bi-twitter-x"></i>
+      </a>
+
+      <a href="#" class="icon disabled">
+        <i class="bi bi-facebook"></i>
+      </a>
+
+      <a href="#" class="icon disabled">
+        <i class="bi bi-instagram"></i>
+      </a>
+
+      <a href="#" class="icon disabled">
+        <i class="bi bi-skype"></i>
+      </a>
+
+      <a
+        href="https://www.linkedin.com/in/pradeep-chinnasamy-a03014370/"
+        class="icon"
+        target="_blank"
+      >
+        <i class="bi bi-linkedin"></i>
+      </a>
+    </div>
+    <nav id="navbar" class="mt-4">
+      <ul class="nav d-flex flex-column align-items-center">
+        <li class="nav-item">
+          <a href="#home" class="nav-link"
+            ><i class="bi bi-house navicon"></i> Home</a
+          >
+        </li>
+        <li class="nav-item">
+          <a href="#about" class="nav-link"
+            ><i class="bi bi-person navicon"></i> About</a
+          >
+        </li>
+        <li class="nav-item">
+          <a href="#resume" class="nav-link"
+            ><i class="bi bi-file-earmark-text navicon"></i> Resume</a
+          >
+        </li>
+        <li class="nav-item">
+          <a href="#portfolio" class="nav-link"
+            ><i class="bi bi-briefcase navicon"></i> Portfolio</a
+          >
+        </li>
+        <li class="nav-item">
+          <a href="#contact" class="nav-link"
+            ><i class="bi bi-envelope"></i> Contact</a
+          >
+        </li>
+        <div class="text-center pt-5">
+          <span class="text-info">Welcome back,</span>
+          <strong class="text-info">{{ user.username }}</strong><br />
+          {% for group in user.groups.all %}
+          <span class="badge bg-secondary rounded-pills">{{group.name}}</span>
+          {% empty %}
+          <span class="text-warning"
+            >You are not a member of any access groups.</span
+          >
+          {% endfor %}
+        </div>
+        <li class="nav-item">
+          <a href="{% url 'myportfolio:logout' %}" class="nav-link">
+            <i class="bi bi-box-arrow-right"></i> Logout
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <div
+    class="offcanvas offcanvas-lg offcanvas-start"
+    tabindex="-1"
+    id="sidebar"
+  >
+    <!-- Header -->
+    <div class="offcanvas-header"></div>
+
+    <!-- Body -->
+    <div class="offcanvas-body">
+      <div class="d-flex justify-content-end">
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="offcanvas"
+        ></button>
+      </div>
+      <div class="text-center">
+        <img src="/media/images/PRCHS.png" class="profile" />
+        <h5 class="mt-3">Pradeep Chinnasamy</h5>
+      </div>
+      <div class="social-icons gap-3 mt-3 d-flex justify-content-center">
+        <a href="#" class="icon disabled">
+          <i class="bi bi-twitter-x"></i>
+        </a>
+
+        <a href="#" class="icon disabled">
+          <i class="bi bi-facebook"></i>
+        </a>
+
+        <a href="#" class="icon disabled">
+          <i class="bi bi-instagram"></i>
+        </a>
+
+        <a href="#" class="icon disabled">
+          <i class="bi bi-skype"></i>
+        </a>
+
+        <a
+          href="https://www.linkedin.com/in/pradeep-chinnasamy-a03014370/"
+          class="icon"
+          target="_blank"
+        >
+          <i class="bi bi-linkedin"></i>
+        </a>
+      </div>
+      <nav id="navbar" class="mt-4">
+        <ul class="nav d-flex flex-column align-items-center">
+          <li class="nav-item">
+            <a href="#home" class="nav-link"
+              ><i class="bi bi-house navicon"></i> Home</a
+            >
+          </li>
+          <li class="nav-item">
+            <a href="#about" class="nav-link"
+              ><i class="bi bi-person navicon"></i> About</a
+            >
+          </li>
+          <li class="nav-item">
+            <a href="#resume" class="nav-link"
+              ><i class="bi bi-file-earmark-text navicon"></i> Resume</a
+            >
+          </li>
+          <li class="nav-item">
+            <a href="#portfolio" class="nav-link"
+              ><i class="bi bi-briefcase navicon"></i> Portfolio</a
+            >
+          </li>
+          <li class="nav-item">
+            <a href="#contact" class="nav-link"
+              ><i class="bi bi-envelope"></i> Contact</a
+            >
+          </li>
+          <div class="text-center pt-5">
+            <span class="text-info">Welcome back,</span>
+            <strong class="text-info">{{ user.username }}</strong><br />
+            {% for group in user.groups.all %}
+            <span class="badge bg-secondary rounded-pills">{{group.name}}</span>
+            {% empty %}
+            <span class="text-warning"
+              >You are not a member of any access groups.</span
+            >
+            {% endfor %}
+          </div>
+          <li class="nav-item">
+            <a href="{% url 'myportfolio:logout' %}" class="nav-link">
+              <i class="bi bi-box-arrow-right"></i> Logout
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <script>
+    const sidebar = document.getElementById("sidebar");
+
+    window.addEventListener("resize", () => {
+      if (window.innerWidth >= 992) {
+        const bsOffcanvas = bootstrap.Offcanvas.getInstance(sidebar);
+        if (bsOffcanvas) {
+          bsOffcanvas.hide();
+        }
+      }
+    });
+  </script>
+</header>

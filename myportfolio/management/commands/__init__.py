@@ -1,0 +1,4 @@
+from .populate_project import Command as PopulateProjectsCommand
+from .populate_skills import Command as PopulateSkillsCommand
+from .populate_technical_skills import Command as PopulateTechnicalSkillsCommand
+from .populate_professional_experience import Command as PopulateProfessionalExperience

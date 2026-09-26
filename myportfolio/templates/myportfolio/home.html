@@ -1,0 +1,629 @@
+{% extends "myportfolio/base.html" %} {% block content%}
+<main>
+  <div class="content">
+    <button
+      class="btn btn-info menu-btn d-lg-none"
+      data-bs-toggle="offcanvas"
+      data-bs-target="#sidebar"
+    >
+      <i class="bi bi-list"></i>
+    </button>
+    <section id="home" class="text-black hero">
+      <div>
+        <h1 class="display-3">Pradeep Chinnasamy</h1>
+        <p style="font-size: 21px; margin-top: 10px">
+          I'm a Full Stack Web Developer (Django)
+        </p>
+      </div>
+    </section>
+    <section id="about" class="bg-light" style="height: auto">
+      <h1>About Me</h1>
+      <p style="text-align: justify">
+        {{Aboutme_Content}}
+      </p>
+      <div class="row mt-3">
+        <div class="col-lg-4 mt-3">
+          <img
+            src="/media/images/PRCHS.png"
+            alt="Profilepic"
+            class="w-100 h-100"
+          />
+        </div>
+        <div class="col-lg-8" style="margin-top: 100px;">
+          <h2>UI/UX Designer & Web Developer</h2>
+          <div class="row">
+            <div class="col-lg-6">
+              <ul class="list-unstyled">
+                <li>
+                  <i class="bi bi-chevron-right"></i> <b>Website</b> :
+                  https://pratheepchinnasamy.com
+                </li>
+                <li>
+                  <i class="bi bi-chevron-right"></i> <b>Phone</b> : +91
+                  739-709-2281
+                </li>
+                <li>
+                  <i class="bi bi-chevron-right"></i> <b>Email</b> :
+                  chinnasamypratheep@gmail.com
+                </li>
+              </ul>
+            </div>
+            <div class="col-lg-6">
+              <ul class="list-unstyled">
+                <li>
+                  <i class="bi bi-chevron-right"></i> <b>Degree</b> : Bachelor
+                  of Engineering
+                </li>
+                <li>
+                  <i class="bi bi-chevron-right"></i> <b>City</b> : Coimbatore,
+                  Tamilnadu
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="py-3">
+          <h2>Skills</h2>
+          <p>
+            I have a strong passion for building modern and efficient web
+            applications using the latest technologies.
+          </p>
+          <div
+            class="row"
+            style="
+              background-color: rgba(169, 204, 241, 0.2);
+              padding: 30px;
+              box-shadow: 0 0 35px rgba(169, 204, 241, 0.8);
+              border-radius: 4px;
+            "
+          >
+          {% include 'myportfolio/includes/error.html' %}
+            {% if skills %}
+              {% for skill in skills %}
+              <div class="col-lg-6">
+                <p>{{skill.skill_name}}</p>
+                <div class="row">
+                  <div class="col-9">
+                    <div class="progress mt-3">
+                      <div class="progress-bar" style="width: {{skill.percentage}}%">{{skill.percentage}}%</div>                  
+                    </div>                
+                  </div>
+                  {%  if perms.myportfolio.change_project %}
+                  <div class="col-3 d-flex gap-3">
+                    <a class="btn btn-outline-warning btn-sm" href="{% url 'myportfolio:edit_skill' skill_id=skill.id %}"><i class="bi bi-pencil-square"></i></a>
+                    <button class="btn btn-outline-danger btn-sm" onclick="confirmbeforedelete('{% url 'myportfolio:delete_skill' skill_id=skill.id %}')"><i class="bi bi-trash"></i></button>
+                  </div>
+                  {% endif %}
+                </div>
+              </div>
+              {% endfor %}
+            {% else %}
+            <p>No Skills Available</p>
+            {% endif %}
+              
+          </div>
+          {%  if perms.myportfolio.change_project %}
+          <div class="pt-4 d-flex justify-content-end">
+            <a class="btn btn-outline-secondary btn-sm" href="{% url 'myportfolio:new_skill' %}"><i class="bi bi-plus"></i> Add Skill</a>
+          </div>
+        </div>
+        {% endif %}
+      </div>
+    </section>
+    <section id="resume" class="bg-light" style="height: auto">
+      <h1>Resume</h1>
+      <div class="row">
+  <div class="col-lg-6">
+
+    <h2 class="fw-bold">Summary</h2>
+
+    <div class="ms-3 border-start border-2 border-primary mt-3 ps-3">
+      <div class="d-flex align-items-start mb-4">
+        <!-- Content -->
+        <div style="text-align: justify">
+          <h5 class="mb-1 fw-bold ps-3">Pradeep Chinnasamy</h5>
+          <p class="mb-0 ps-3">
+            Passionate Django Web Developer with 3+ years of experience
+            creating high-performance, scalable backend systems and
+            delivering end-to-end web solutions.
+          </p>
+          <ul>
+            <li>
+              3/83 A, Kalampalayam, Coimbatore, Seeliyur(PO) - 641 113.
+            </li>
+            <li>( 91 ) + 739-709-2281</li>
+            <li>chinnasamypratheep@gmail.com</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="fw-bold">Education</h2>
+
+    <div class="ms-3 border-start border-2 border-primary mt-3 ps-3">
+      <div class="d-flex align-items-start mb-4">
+
+        <!-- Circle -->
+        <div
+          class="rounded-circle border border-primary bg-white me-3 mt-2"
+          style="width: 17px; height: 14px; margin-left: -25px"
+        ></div>
+
+        <!-- Content -->
+        <div style="text-align: justify">
+          <h5 class="mb-1 fw-bold">Bachelor of Engineering</h5>
+          <p class="mb-1 fw-semibold">
+            Electrical and Electronics Engineering
+          </p>
+          <ul class="mb-0 ps-3">
+            <li>Graduated 2019 | CGPA: 6.97</li>
+            <li>United Institute of Technology, Coimbatore, Tamilnadu</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+    <h2 class="fw-bold">Technical Skills</h2>
+
+    {% include 'myportfolio/includes/error.html' %}
+
+    <div class="ms-3 border-start border-2 border-primary mt-3 ps-3">
+      <div class="d-flex align-items-start mb-4">
+
+        <!-- Circle -->
+        <div
+          class="rounded-circle border border-primary bg-white me-3 mt-2"
+          style="width: 62px; height: 14px; margin-left: -26px"
+        ></div>
+
+        <!-- Content -->
+        <div style="text-align: justify">
+
+          <dl class="mb-0 ps-3">
+
+            <div class="row">
+
+              {% for technical_skill in technical_skills %}
+
+                <div class="col-9">
+                  <dt>{{ technical_skill.skill_category }}</dt>
+                </div>
+                {%  if perms.myportfolio.change_project %}
+                <div class="col-3 d-flex gap-3">
+                  <a
+                    class="btn btn-outline-warning btn-sm"
+                    href="{% url 'myportfolio:edit_technical_skill' technical_skill_id=technical_skill.id %}"
+                  >
+                    <i class="bi bi-pencil-square"></i>
+                  </a>
+
+                  <button
+                    class="btn btn-outline-danger btn-sm"
+                    onclick="confirmbeforedelete('{% url 'myportfolio:delete_technical_skill' technical_skill_id=technical_skill.id %}')"
+                  >
+                    <i class="bi bi-trash"></i>
+                  </button>
+                </div>
+                {% endif %}
+                <div class="col-12">
+                  <dd>{{ technical_skill.skills }}</dd>
+                </div>
+
+              {% endfor %}
+
+            </div>
+
+          </dl>
+
+        </div>
+      </div>
+    </div>
+    {%  if perms.myportfolio.change_project %}
+    <div class="pt-4 d-flex justify-content-end">
+      <a
+        class="btn btn-outline-secondary btn-sm"
+        href="{% url 'myportfolio:new_technical_skill' %}"
+      >
+        <i class="bi bi-plus"></i> Add Technical Skill
+      </a>
+    </div>{% endif %}
+
+  </div>
+
+
+  <!-- RIGHT COLUMN -->
+
+  <div class="col-lg-6">
+
+    <h2 class="fw-bold">Professional Experience</h2>
+
+    {% with experience=professional_experience.0 %}
+
+      <div class="ms-3 border-start border-2 border-primary mt-3 ps-3">
+
+        <div class="d-flex align-items-start mb-4">
+
+          <div
+            class="rounded-circle border border-primary bg-white me-3 mt-2"
+            style="width: 21px; height: 14px; margin-left: -25px"
+          ></div>
+
+          <div style="text-align: justify">
+
+              <div class="row">
+              <div class="col-9">
+                   <h5 class="mb-1 fw-bold">
+                  {{ experience.role }}
+                </h5>                
+                </div>
+                {%  if perms.myportfolio.change_project %}
+                <div class="col-3 d-flex gap-3">
+                  <a
+                    class="btn btn-outline-warning btn-sm"
+                    href="{% url 'myportfolio:edit_professional_experience' prof_exp_id=experience.id %}"
+                  >
+                    <i class="bi bi-pencil-square"></i>
+                  </a>
+
+                  <button
+                    class="btn btn-outline-danger btn-sm"
+                    onclick="confirmbeforedelete('{% url 'myportfolio:delete_professional_experience' prof_exp_id=experience.id %}')"
+                  >
+                    <i class="bi bi-trash"></i>
+                  </button>
+                </div>
+                {% endif %}
+
+               </div>
+            <p class="mb-1 mt-2 fw-semibold">
+                  {{ experience.company_name }} - {{ location }}
+                <span class="mb-2 text-muted small">
+                  {{ experience.joining_date|date:"F Y" }} -
+
+                  {% if experience.leaving_date %}
+                    {{ experience.leaving_date|date:"F Y" }}
+                  {% else %}
+                    Present
+                  {% endif %}
+                </span>
+              </p>
+
+            <ul class="mb-0 ps-3">
+
+              {% for detail in experience.details.splitlines %}
+                <li class="mb-2">
+                  {{ detail }}
+                </li>
+              {% endfor %}
+
+            </ul>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    {% endwith %}
+
+  </div>
+
+
+  {% if professional_experience|slice:"1:" %}
+  {% include 'myportfolio/includes/error.html' %}
+    <div class="row mt-4">
+
+      {% for experience in professional_experience|slice:"1:" %}
+
+        <div class="col-lg-6 mb-4">
+
+          <div class="ms-3 border-start border-2 border-primary mt-3 ps-3">
+
+            <div class="d-flex align-items-start mb-4">
+
+              <div
+                class="rounded-circle border border-primary bg-white me-3 mt-2"
+                style="width: 21px; height: 14px; margin-left: -25px"
+              ></div>
+
+              <div style="text-align: justify">
+
+              <div class="row">
+              <div class="col-9">
+                   <h5 class="mb-1 fw-bold">
+                  {{ experience.role }}
+                </h5>                
+                </div>
+
+                <div class="col-3 d-flex gap-3">
+                  <a
+                    class="btn btn-outline-warning btn-sm"
+                    href="{% url 'myportfolio:edit_professional_experience' prof_exp_id=experience.id %}"
+                  >
+                    <i class="bi bi-pencil-square"></i>
+                  </a>
+
+                  <button
+                    class="btn btn-outline-danger btn-sm"
+                    onclick="confirmbeforedelete('{% url 'myportfolio:delete_professional_experience' prof_exp_id=experience.id %}')"
+                  >
+                    <i class="bi bi-trash"></i>
+                  </button>
+                </div>
+
+               </div>
+                <p class="mb-1 mt-2 fw-semibold">
+                  {{ experience.company_name }} - {{ location }}
+                <span class="mb-2 text-muted small">
+                  {{ experience.joining_date|date:"F Y" }} -
+
+                  {% if experience.leaving_date %}
+                    {{ experience.leaving_date|date:"F Y" }}
+                  {% else %}
+                    Present
+                  {% endif %}
+                </span>
+              </p>
+
+                <ul class="mb-0 ps-3">
+
+                  {% for detail in experience.details.splitlines %}
+                    <li class="mb-2">
+                      {{ detail }}
+                    </li>
+                  {% endfor %}
+
+                </ul>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      {% endfor %}
+
+    </div>
+
+  {% else %}
+  </div>
+
+  {% endif %}
+
+  {%  if perms.myportfolio.change_project %}
+  <div class="d-flex justify-content-end" style="margin-top: -30px">
+    <a
+      class="btn btn-outline-secondary btn-sm"
+      href="{% url 'myportfolio:new_professional_experience' %}"
+    >
+      <i class="bi bi-plus"></i> Add Professional Experience
+    </a>
+  </div>{% endif %}
+</section>
+    <section
+      id="portfolio"
+      class="text-dark"
+      style="background-color: rgba(150, 160, 170, 0.1)"
+    >
+      <h1>Portfolio</h1>
+      <div class="container mt-5">
+        {% include 'myportfolio/includes/error.html' %}
+        <div class="row">
+          {% if projects %} 
+          {% for project in projects %}
+          {% if perms.myportfolio.can_publish %}
+          <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3 mt-3">
+            <div class="card">
+              <div class="row">
+                <div class="col-6 col-sm-12">
+                  <img
+                    src="https://i.pinimg.com/736x/a8/08/35/a808353507aa0bd01a6812a412240758.jpg"
+                    alt=""
+                    class="img-fluid rounded w-100" style="height:270px;"
+                  />
+                </div>
+                <div class="col-6 col-sm-12">
+                  <div class="card-body text-center">
+                    <h6>{{project.name | truncatechars:50 }}</h6>
+                    <p>{{project.created_at | date:'F j, Y'}}</p>
+                    <div class="d-flex justify-content-between mt-2">                          
+                          <a class="btn btn-outline-info btn-sm" href="{% url "myportfolio:details" slug=project.slug %}"><i class="bi bi-info"></i></a >
+                          <a class="btn btn-outline-warning btn-sm" href="{% url 'myportfolio:edit_project' project_id=project.id %}"><i class="bi bi-pencil-square"></i></a>
+                          <button class="btn btn-outline-danger btn-sm" onclick="confirmbeforedelete('{% url 'myportfolio:delete_project' project_id=project.id %}')"><i class="bi bi-trash"></i></button>
+                          {% if not project.is_published %}
+                          <a href="{% url 'myportfolio:publish_project' project_id=project.id %}" class="btn btn-outline-success btn-sm"><i class="bi bi-rocket-takeoff"></i></a>
+                          {% endif %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% elif project.is_published %}
+            <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3 mt-3">
+            <div class="card">
+              <div class="row">
+                <div class="col-6 col-sm-12">
+                  <img
+                    src="{{project.img_url}}"
+                    alt=""
+                    class="img-fluid rounded w-100" style="height:240px;"
+                  />
+                </div>
+                <div class="col-6 col-sm-12 d-flex justify-content-center align-items-center">
+                  <div class="card-body text-center">
+                    <h6>{{project.name | truncatechars:50 }}</h6>
+                    <p>{{project.created_at | date:'F j, Y'}}</p>
+                    {% if  perms.myportfolio.change_project %}
+                    <div class="d-flex justify-content-between mt-2">                                                  
+                          <a href="{% url "myportfolio:details" slug=project.slug %}" class="btn btn-outline-info btn-sm"><i class="bi bi-info"></i></a >
+                          <a class="btn btn-outline-warning btn-sm" href="{% url 'myportfolio:edit_project' project_id=project.id %}"><i class="bi bi-pencil-square"></i></a>                          
+                          <button class="btn btn-outline-danger btn-sm" onclick="confirmbeforedelete('{% url 'myportfolio:delete_project' project_id=project.id %}')"><i class="bi bi-trash"></i></button>
+                          {% if not project.is_published %}
+                          <a href="{% url 'myportfolio:publish_project' project_id=project.id %}" class="btn btn-outline-success btn-sm"><i class="bi bi-rocket-takeoff"></i></a>
+                          {% endif %}
+                    </div>
+                    {% else %}
+                      <div class="d-flex justify-content-center">
+                          <a href="{% url "myportfolio:details" slug=project.slug %}" class="btn btn-outline-info btn-sm"><i class="bi bi-info"></i></a >
+                      </div>                     
+                    {% endif %}                    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+          {% endfor %} {% else %}
+          <p>No Projects Available</p>
+          {% endif %}
+          {%  if perms.myportfolio.add_project %}
+          <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3 mt-3">
+              <a href="{% url 'myportfolio:new_project' %}" class="text-decoration-none" target="_blank">
+                  <div class="card h-100 text-center">
+                      <div class="card-body d-flex flex-column justify-content-center align-items-center py-5">
+                          <div class="display-3 text-primary">+</div>
+                          <h5 class="mt-2 text-dark">Add Project</h5>
+                      </div>
+                  </div>
+              </a>
+          </div>
+          {%endif %}
+        </div>
+      </div>
+    </section>
+    <section id="contact" class="text-black">
+      <h1>Contact</h1>
+      <p>
+        Looking for a Django developer or automation specialist? I'd love to
+        hear about your project. Whether it's web development, cloud solutions,
+        or process automation, let's connect and build something great together.
+      </p>
+      <div class="container-fluid">
+        <div class="row g-3">
+          <!-- Contact Info -->
+          <div class="col-12 col-xl-3">
+            <div class="shadow p-3 rounded bg-light h-100 text-break">
+              <div class="d-flex align-items-start">
+                <i class="bi bi-geo-alt"></i>
+                <div class="ps-2">
+                  <h5 class="mb-1">Address</h5>
+                  <p class="mb-0">
+                    3/83A, Kalampalayam, Seeliyur (PO), Coimbatore, Tamil Nadu
+                    641113, India
+                  </p>
+                </div>
+              </div>
+
+              <div class="d-flex align-items-start mt-4">
+                <i class="bi bi-telephone"></i>
+                <div class="ps-2">
+                  <h5 class="mb-1">Call Us</h5>
+                  <p class="mb-0">( +91 ) 739-709-2281</p>
+                </div>
+              </div>
+
+              <div class="d-flex align-items-start mt-4">
+                <i class="bi bi-envelope"></i>
+                <div class="ps-2">
+                  <h5 class="mb-1">Email Us</h5>
+                  <p class="mb-0">chinnasamypartheep@gmail.com</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contact Form -->
+          <div class="col-12 col-xl-9">
+            <div class="shadow p-3 rounded bg-light">
+              <!--Error Message-->
+              {% for field in form %}
+                {% if field.errors %}
+                <div class="12 alert alert-danger" role="alert">
+                  <span class="fw-bold">{{field.label_tag}}</span>
+                  {% for errors in field.errors %}
+                  <span class="text-danger">{{errors}}</span>
+                  {% endfor %}
+                </div>
+                {% endif %}
+              {% endfor %}
+              <!--Success Message-->
+              {% if success_message %}
+              <div class="alert alert-success" role="alert">
+                  {{success_message}}              
+              </div>
+              {% endif %}
+              <form method="POST" action="#contact">
+                {% csrf_token %}
+                <div class="mb-3">
+                  <label for="name" class="form-label">Your Name<span class="text-danger"> *</span></label>
+                  <input
+                    type="text"
+                    name="name"
+                    id="name"
+                    class="form-control"
+                    value="{{form.name.value|default:""}}"
+                  />
+                </div>
+
+                <div class="mb-3">
+                  <label for="email" class="form-label">Your Email<span class="text-danger"> *</span></label>
+                  <input
+                    type="email"
+                    name="email"
+                    id="email"
+                    class="form-control"
+                    value="{{form.email.value|default:""}}"
+                  />
+                </div>
+
+                <div class="mb-3">
+                  <label for="subject" class="form-label">Subject<span class="text-danger"> *</span></label>
+                  <input
+                    type="text"
+                    name="subject"
+                    id="subject"
+                    class="form-control"
+                    value="{{form.subject.value|default:""}}"
+                  />
+                </div>
+
+                <div class="mb-3">
+                  <label for="message" class="form-label">Message<span class="text-danger"> *</span></label>
+                  <textarea
+                    name="message"
+                    id="message"
+                    rows="9"
+                    class="form-control"
+                  >{{form.message.value|default:""}}</textarea>
+                </div>
+
+                <div class="text-center">
+                  <button type="submit" class="btn btn-info">
+                  Send Message
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+<script>
+  function confirmbeforedelete(url){
+      var userconfirmed = confirm("Are you sure want to delete?")
+      if (userconfirmed){
+        window.location.href = url
+      }
+  }
+
+</script>
+{% endblock %}
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
